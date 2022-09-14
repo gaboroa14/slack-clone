@@ -5,10 +5,12 @@ from rest_framework import status
 from .models import *
 from .serializers import *
 
+
 class PlansAPI(APIView):
     def get(self, request):
-        plans = Plan.objects.all()
+        plans = Plan.objects.all().order_by('-id')
         return Response(PlanSerializer(plans, many=True).data, status.HTTP_200_OK)
+
 
 class ClientsAPI(APIView):
     def get(self, request):
